@@ -26,8 +26,8 @@ from dotenv import load_dotenv
 load_dotenv(".env")
 
 
-with open("config.json","r") as f:
-    config = json.loads(f.read())
+# with open("config.json","r") as f:
+#     config = json.loads(f.read())
 
 OWNER_ID = int(os.environ.get("OWNER_ID", "2099942562"))
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
