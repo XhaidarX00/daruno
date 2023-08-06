@@ -27,7 +27,7 @@ from .user_setting import UserSetting
 from .shared_vars import gm
 
 GETTEXT_DOMAIN = 'unobot'
-GETTEXT_DIR = 'locales'
+GETTEXT_DIR = 'daruno/locales'
 
 
 class _Underscore(object):
