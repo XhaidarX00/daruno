@@ -105,7 +105,7 @@ def user_locale(func):
         user = _user_chat_from_update(update)[0]
 
         with db_session:
-            us = UserSetting.get(id=user.id)
+            us = UserSetting.get(id=user)
 
         if us and us.lang != 'en':
             _.push(us.lang)
@@ -128,7 +128,7 @@ def game_locales(func):
 
         if player:
             for player in player.game.players:
-                us = UserSetting.get(id=player.user.id)
+                us = UserSetting.get(id=player.user)
 
                 if us and us.lang != 'en':
                     loc = us.lang
@@ -159,13 +159,13 @@ def _user_chat_from_update(update):
     except (NameError, AttributeError):
         try:
             user = update.inline_query.from_user
-            chat = gm.userid_current[user.id].game.chat
+            chat = gm.userid_current[user].game.chat
         except KeyError:
             chat = None
         except (NameError, AttributeError):
             try:
                 user = update.chosen_inline_result.from_user
-                chat = gm.userid_current[user.id].game.chat
+                chat = gm.userid_current[user].game.chat
             except (NameError, AttributeError, KeyError):
                 chat = None
 

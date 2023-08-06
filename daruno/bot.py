@@ -61,9 +61,9 @@ def notify_me(bot, update):
                           "when a new game is started there."))
     else:
         try:
-            gm.remind_dict[chat_id].add(update.message.from_user.id)
+            gm.remind_dict[chat_id].add(update.message.from_user)
         except KeyError:
-            gm.remind_dict[chat_id] = {update.message.from_user.id}
+            gm.remind_dict[chat_id] = {update.message.from_user}
 
 
 @user_locale
@@ -87,7 +87,7 @@ def new_game(bot, update):
 
         game = gm.new_game(update.message.chat)
         game.starter = update.message.from_user
-        game.owner.append(update.message.from_user.id)
+        game.owner.append(update.message.from_user)
         game.mode = DEFAULT_GAMEMODE
         send_async(bot, chat_id,
                    text=_("Created a new game! Join the game with /join "
@@ -287,7 +287,7 @@ def select_game(bot, update):
     """Handler for callback queries to select the current game"""
 
     chat_id = int(update.callback_query.data)
-    user_id = update.callback_query.from_user.id
+    user_id = update.callback_query.from_user
     players = gm.userid_players[user_id]
     for player in players:
         if player.game.chat.id == chat_id:
@@ -399,13 +399,13 @@ def start_game(bot, update, args, job_queue):
             start_player_countdown(bot, game, job_queue)
 
     elif len(args) and args[0] == 'select':
-        players = gm.userid_players[update.message.from_user.id]
+        players = gm.userid_players[update.message.from_user]
 
         groups = list()
         for player in players:
             title = player.game.chat.title
 
-            if player is gm.userid_current[update.message.from_user.id]:
+            if player is gm.userid_current[update.message.from_user]:
                 title = '- %s -' % player.game.chat.title
 
             groups.append(
@@ -435,7 +435,7 @@ def close_game(bot, update):
 
     game = games[-1]
 
-    if user.id in game.owner:
+    if user in game.owner:
         game.open = False
         send_async(bot, chat.id, text=_("Closed the lobby. "
                                         "No more players can join this game."))
@@ -463,7 +463,7 @@ def open_game(bot, update):
 
     game = games[-1]
 
-    if user.id in game.owner:
+    if user in game.owner:
         game.open = True
         send_async(bot, chat.id, text=_("Opened the lobby. "
                                         "New players may /join the game."))
@@ -490,7 +490,7 @@ def enable_translations(bot, update):
 
     game = games[-1]
 
-    if user.id in game.owner:
+    if user in game.owner:
         game.translate = True
         send_async(bot, chat.id, text=_("Enabled multi-translations. "
                                         "Disable with /disable_translations"))
@@ -518,7 +518,7 @@ def disable_translations(bot, update):
 
     game = games[-1]
 
-    if user.id in game.owner:
+    if user in game.owner:
         game.translate = False
         send_async(bot, chat.id, text=_("Disabled multi-translations. "
                                         "Enable them again with "
@@ -579,7 +579,7 @@ def reply_to_query(bot, update):
 
     try:
         user = update.inline_query.from_user
-        user_id = user.id
+        user_id = user
         players = gm.userid_players[user_id]
         player = gm.userid_current[user_id]
         game = player.game
@@ -598,7 +598,7 @@ def reply_to_query(bot, update):
                 add_not_started(results)
 
 
-        elif user_id == game.current_player.user.id:
+        elif user_id == game.current_player.user:
             if game.choosing_color:
                 add_choose_color(results, game)
                 add_other_cards(player, results, game)
@@ -623,7 +623,7 @@ def reply_to_query(bot, update):
 
                 add_gameinfo(game, results)
 
-        elif user_id != game.current_player.user.id or not game.started:
+        elif user_id != game.current_player.user or not game.started:
             for card in sorted(player.cards):
                 add_card(game, card, results, can_play=False)
 
@@ -649,7 +649,7 @@ def process_result(bot, update, job_queue):
     """
     try:
         user = update.chosen_inline_result.from_user
-        player = gm.userid_current[user.id]
+        player = gm.userid_current[user]
         game = player.game
         result_id = update.chosen_inline_result.result_id
         chat = game.chat
