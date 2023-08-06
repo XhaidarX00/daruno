@@ -734,5 +734,5 @@ settings.register()
 dispatcher.add_handler(MessageHandler(Filters.status_update, status_update))
 dispatcher.add_error_handler(error)
 
-start_bot(updater)
-updater.idle()
+# start_bot(updater)
+# updater.idle()
