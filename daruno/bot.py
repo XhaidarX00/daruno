@@ -27,7 +27,7 @@ from telegram.ext import InlineQueryHandler, ChosenInlineResultHandler, \
 from telegram.ext.dispatcher import run_async
 
 from .card import *
-from settings import *
+from .settings import *
 import simple_commands
 from .actions import do_skip, do_play_card, do_draw, do_call_bluff, start_player_countdown
 from .config import WAITING_TIME, DEFAULT_GAMEMODE, MIN_PLAYERS
