@@ -151,7 +151,8 @@ def game_locales(func):
 
 
 def _user_chat_from_update(update):
-
+    user = ''
+    chat = ''
     try:
         user = update.message.from_user
         chat = update.message.chat
