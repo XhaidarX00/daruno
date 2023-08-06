@@ -92,7 +92,8 @@ def do_play_card(bot, player, result_id):
 
     us = UserSetting.get(id=user)
     if not us:
-        us = UserSetting(id=user)
+        # us = UserSetting(id=user)
+        us = UserSetting(id=user, lang='en', stats=True)
 
     if us.stats:
         us.cards_played += 1
