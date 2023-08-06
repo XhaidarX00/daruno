@@ -26,7 +26,7 @@ from telegram.ext import InlineQueryHandler, ChosenInlineResultHandler, \
     CommandHandler, MessageHandler, Filters, CallbackQueryHandler
 from telegram.ext.dispatcher import run_async
 
-import card as c
+from .card import *
 import settings
 import simple_commands
 from .actions import do_skip, do_play_card, do_draw, do_call_bluff, start_player_countdown
@@ -388,7 +388,7 @@ def start_game(bot, update, args, job_queue):
                 """Send the first card and player"""
 
                 bot.sendSticker(chat.id,
-                                sticker=c.STICKERS[str(game.last_card)],
+                                sticker=STICKERS[str(game.last_card)],
                                 timeout=TIMEOUT)
 
                 bot.sendMessage(chat.id,
@@ -609,7 +609,7 @@ def reply_to_query(bot, update):
                 else:
                     add_pass(results, game)
 
-                if game.last_card.special == c.DRAW_FOUR and game.draw_counter:
+                if game.last_card.special == DRAW_FOUR and game.draw_counter:
                     add_call_bluff(results, game)
 
                 playable = player.playable_cards()
@@ -686,7 +686,7 @@ def process_result(bot, update, job_queue):
         do_draw(bot, player)
     elif result_id == 'pass':
         game.turn()
-    elif result_id in c.COLORS:
+    elif result_id in COLORS:
         game.choose_color(result_id)
     else:
         reset_waiting_time(bot, player)

@@ -21,7 +21,7 @@
 import logging
 from datetime import datetime
 
-import card as c
+from .card import *
 from .errors import DeckEmptyError
 from .config import WAITING_TIME
 
@@ -168,12 +168,12 @@ class Player(object):
                 not card.special):
             self.logger.debug("Card's color or value doesn't match")
             is_playable = False
-        elif last.value == c.DRAW_TWO and not \
-                card.value == c.DRAW_TWO and self.game.draw_counter:
+        elif last.value == DRAW_TWO and not \
+                card.value == DRAW_TWO and self.game.draw_counter:
             self.logger.debug("Player has to draw and can't counter")
             is_playable = False
-        elif last.special == c.DRAW_FOUR and not \
-                card.value == c.DRAW_FOUR and self.game.draw_counter:
+        elif last.special == DRAW_FOUR and not \
+                card.value == DRAW_FOUR and self.game.draw_counter:
             self.logger.debug("Player has to draw and can't counter")
             is_playable = False
         elif not last.color:

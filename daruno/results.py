@@ -25,14 +25,14 @@ from uuid import uuid4
 from telegram import InlineQueryResultArticle, InputTextMessageContent, \
     InlineQueryResultCachedSticker as Sticker
 
-import card as c
+from .card import *
 from .utils import display_color, display_color_group, display_name
 from .internationalization import _, __
 
 
 def add_choose_color(results, game):
     """Add choose color options"""
-    for color in c.COLORS:
+    for color in COLORS:
         results.append(
             InlineQueryResultArticle(
                 id=color,
@@ -136,7 +136,7 @@ def add_draw(player, results):
 
     results.append(
         Sticker(
-            "draw", sticker_file_id=c.STICKERS['option_draw'],
+            "draw", sticker_file_id=STICKERS['option_draw'],
             input_message_content=
             InputTextMessageContent(__('Drawing {number} card',
                                        'Drawing {number} cards', n,
@@ -152,7 +152,7 @@ def add_gameinfo(game, results):
     results.append(
         Sticker(
             "gameinfo",
-            sticker_file_id=c.STICKERS['option_info'],
+            sticker_file_id=STICKERS['option_info'],
             input_message_content=game_info(game)
         )
     )
@@ -162,7 +162,7 @@ def add_pass(results, game):
     """Add option to pass"""
     results.append(
         Sticker(
-            "pass", sticker_file_id=c.STICKERS['option_pass'],
+            "pass", sticker_file_id=STICKERS['option_pass'],
             input_message_content=InputTextMessageContent(
                 __('Pass', multi=game.translate)
             )
@@ -175,7 +175,7 @@ def add_call_bluff(results, game):
     results.append(
         Sticker(
             "call_bluff",
-            sticker_file_id=c.STICKERS['option_bluff'],
+            sticker_file_id=STICKERS['option_bluff'],
             input_message_content=
             InputTextMessageContent(__("I'm calling your bluff!",
                                        multi=game.translate))
@@ -188,11 +188,11 @@ def add_card(game, card, results, can_play):
 
     if can_play:
         results.append(
-            Sticker(str(card), sticker_file_id=c.STICKERS[str(card)])
+            Sticker(str(card), sticker_file_id=STICKERS[str(card)])
         )
     else:
         results.append(
-            Sticker(str(uuid4()), sticker_file_id=c.STICKERS_GREY[str(card)],
+            Sticker(str(uuid4()), sticker_file_id=STICKERS_GREY[str(card)],
                     input_message_content=game_info(game))
         )
 

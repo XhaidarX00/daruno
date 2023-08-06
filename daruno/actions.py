@@ -2,7 +2,7 @@ import random
 
 import logging
 
-import card as c
+from .card import *
 from datetime import datetime
 
 from telegram import Message, Chat
@@ -84,7 +84,7 @@ def do_skip(bot, player, job_queue=None):
 
 def do_play_card(bot, player, result_id):
     """Plays the selected card and sends an update to the group if needed"""
-    card = c.from_str(result_id)
+    card = from_str(result_id)
     player.play(card)
     game = player.game
     chat = game.chat
@@ -141,8 +141,8 @@ def do_draw(bot, player):
                    text=__("There are no more cards in the deck.",
                            multi=game.translate))
 
-    if (game.last_card.value == c.DRAW_TWO or
-        game.last_card.special == c.DRAW_FOUR) and \
+    if (game.last_card.value == DRAW_TWO or
+        game.last_card.special == DRAW_FOUR) and \
             draw_counter_before > 0:
         game.turn()
 

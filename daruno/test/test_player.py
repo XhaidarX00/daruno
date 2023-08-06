@@ -20,9 +20,9 @@
 
 import unittest
 
-from game import Game
-from player import Player
-import card as c
+from ..game import Game
+from ..player import Player
+from ..card import *
 
 
 class Test(unittest.TestCase):
@@ -96,41 +96,41 @@ class Test(unittest.TestCase):
     def test_playable_cards_simple(self):
         p = Player(self.game, "Player 0")
 
-        self.game.last_card = c.Card(c.RED, '5')
+        self.game.last_card = Card(RED, '5')
 
-        p.cards = [c.Card(c.RED, '0'), c.Card(c.RED, '5'), c.Card(c.BLUE, '0'),
-                   c.Card(c.GREEN, '5'), c.Card(c.GREEN, '8')]
+        p.cards = [Card(RED, '0'), Card(RED, '5'), Card(BLUE, '0'),
+                   Card(GREEN, '5'), Card(GREEN, '8')]
 
-        expected = [c.Card(c.RED, '0'), c.Card(c.RED, '5'),
-                    c.Card(c.GREEN, '5')]
+        expected = [Card(RED, '0'), Card(RED, '5'),
+                    Card(GREEN, '5')]
 
         self.assertListEqual(p.playable_cards(), expected)
 
     def test_playable_cards_on_draw_two(self):
         p = Player(self.game, "Player 0")
 
-        self.game.last_card = c.Card(c.RED, c.DRAW_TWO)
+        self.game.last_card = Card(RED, DRAW_TWO)
         self.game.draw_counter = 2
 
-        p.cards = [c.Card(c.RED, c.DRAW_TWO), c.Card(c.RED, '5'),
-                   c.Card(c.BLUE, '0'), c.Card(c.GREEN, '5'),
-                   c.Card(c.GREEN, c.DRAW_TWO)]
+        p.cards = [Card(RED, DRAW_TWO), Card(RED, '5'),
+                   Card(BLUE, '0'), Card(GREEN, '5'),
+                   Card(GREEN, DRAW_TWO)]
 
-        expected = [c.Card(c.RED, c.DRAW_TWO), c.Card(c.GREEN, c.DRAW_TWO)]
+        expected = [Card(RED, DRAW_TWO), Card(GREEN, DRAW_TWO)]
 
         self.assertListEqual(p.playable_cards(), expected)
 
     def test_playable_cards_on_draw_four(self):
         p = Player(self.game, "Player 0")
 
-        self.game.last_card = c.Card(c.RED, None, c.DRAW_FOUR)
+        self.game.last_card = Card(RED, None, DRAW_FOUR)
         self.game.draw_counter = 4
 
-        p.cards = [c.Card(c.RED, c.DRAW_TWO), c.Card(c.RED, '5'),
-                   c.Card(c.BLUE, '0'), c.Card(c.GREEN, '5'),
-                   c.Card(c.GREEN, c.DRAW_TWO),
-                   c.Card(None, None, c.DRAW_FOUR),
-                   c.Card(None, None, c.CHOOSE)]
+        p.cards = [Card(RED, DRAW_TWO), Card(RED, '5'),
+                   Card(BLUE, '0'), Card(GREEN, '5'),
+                   Card(GREEN, DRAW_TWO),
+                   Card(None, None, DRAW_FOUR),
+                   Card(None, None, CHOOSE)]
 
         expected = list()
 
@@ -140,25 +140,25 @@ class Test(unittest.TestCase):
         p = Player(self.game, "Player 0")
         Player(self.game, "Player 01")
 
-        self.game.last_card = c.Card(c.RED, '1')
+        self.game.last_card = Card(RED, '1')
 
-        p.cards = [c.Card(c.RED, c.DRAW_TWO), c.Card(c.RED, '5'),
-                   c.Card(c.BLUE, '0'), c.Card(c.GREEN, '5'),
-                   c.Card(c.RED, '5'), c.Card(c.GREEN, c.DRAW_TWO),
-                   c.Card(None, None, c.DRAW_FOUR),
-                   c.Card(None, None, c.CHOOSE)]
+        p.cards = [Card(RED, DRAW_TWO), Card(RED, '5'),
+                   Card(BLUE, '0'), Card(GREEN, '5'),
+                   Card(RED, '5'), Card(GREEN, DRAW_TWO),
+                   Card(None, None, DRAW_FOUR),
+                   Card(None, None, CHOOSE)]
 
         p.playable_cards()
         self.assertTrue(p.bluffing)
 
-        p.cards = [c.Card(c.BLUE, '1'), c.Card(c.GREEN, '1'),
-                   c.Card(c.GREEN, c.DRAW_TWO),
-                   c.Card(None, None, c.DRAW_FOUR),
-                   c.Card(None, None, c.CHOOSE)]
+        p.cards = [Card(BLUE, '1'), Card(GREEN, '1'),
+                   Card(GREEN, DRAW_TWO),
+                   Card(None, None, DRAW_FOUR),
+                   Card(None, None, CHOOSE)]
 
         p.playable_cards()
 
-        p.play(c.Card(None, None, c.DRAW_FOUR))
-        self.game.choose_color(c.GREEN)
+        p.play(Card(None, None, DRAW_FOUR))
+        self.game.choose_color(GREEN)
 
         self.assertFalse(self.game.current_player.prev.bluffing)

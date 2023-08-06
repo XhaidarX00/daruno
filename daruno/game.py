@@ -23,7 +23,7 @@ from .config import ADMIN_LIST, OPEN_LOBBY, DEFAULT_GAMEMODE, ENABLE_TRANSLATION
 from datetime import datetime
 
 from .deck import Deck
-import card as c
+from .card import *
 
 class Game(object):
     """ This class represents a game of UNO """
@@ -111,15 +111,15 @@ class Game(object):
         self.last_card = card
 
         self.logger.info("Playing card " + repr(card))
-        if card.value == c.SKIP:
+        if card.value == SKIP:
             self.turn()
-        elif card.special == c.DRAW_FOUR:
+        elif card.special == DRAW_FOUR:
             self.draw_counter += 4
             self.logger.debug("Draw counter increased by 4")
-        elif card.value == c.DRAW_TWO:
+        elif card.value == DRAW_TWO:
             self.draw_counter += 2
             self.logger.debug("Draw counter increased by 2")
-        elif card.value == c.REVERSE:
+        elif card.value == REVERSE:
             # Special rule for two players
             if self.current_player is self.current_player.next.next:
                 self.turn()
@@ -127,7 +127,7 @@ class Game(object):
                 self.reverse()
 
         # Don't turn if the current player has to choose a color
-        if card.special not in (c.CHOOSE, c.DRAW_FOUR):
+        if card.special not in (CHOOSE, DRAW_FOUR):
             self.turn()
         else:
             self.logger.debug("Choosing Color...")
