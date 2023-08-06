@@ -28,7 +28,7 @@ from telegram.ext.dispatcher import run_async
 
 from .card import *
 from .settings import *
-import simple_commands
+from .simple_commands import register as sc
 from .actions import do_skip, do_play_card, do_draw, do_call_bluff, start_player_countdown
 from .config import WAITING_TIME, DEFAULT_GAMEMODE, MIN_PLAYERS
 from .errors import (NoGameInChatError, LobbyClosedError, AlreadyJoinedError,
@@ -729,7 +729,7 @@ dispatcher.add_handler(CommandHandler('disable_translations',
                                       disable_translations))
 dispatcher.add_handler(CommandHandler('skip', skip_player))
 dispatcher.add_handler(CommandHandler('notify_me', notify_me))
-simple_commands.register()
+sc()
 register()
 dispatcher.add_handler(MessageHandler(Filters.status_update, status_update))
 dispatcher.add_error_handler(error)
