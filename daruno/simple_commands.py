@@ -112,7 +112,7 @@ def news(bot, update):
 @user_locale
 def stats(bot, update):
     user = update.message.from_user
-    us = UserSetting.get(id=int(user))
+    us = UserSetting.get(id=user)
     if not us or not us.stats:
         send_async(bot, update.message.chat_id,
                    text=_("You did not enable statistics. Use /settings in "

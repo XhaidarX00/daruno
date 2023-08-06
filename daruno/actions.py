@@ -88,9 +88,9 @@ def do_play_card(bot, player, result_id):
     player.play(card)
     game = player.game
     chat = game.chat
-    user = player.user
+    user = int(player.user)
 
-    us = UserSetting.get(id=int(user))
+    us = UserSetting.get(id=user)
     if not us:
         us = UserSetting(id=user)
 
