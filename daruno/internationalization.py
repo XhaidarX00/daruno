@@ -37,7 +37,7 @@ class _Underscore(object):
             locale: gettext.GNUTranslations(
                 open(gettext.find(
                     GETTEXT_DOMAIN, GETTEXT_DIR, languages=[locale]
-                ), 'rb')
+                ), 'rb') if gettext.find(GETTEXT_DOMAIN, GETTEXT_DIR, languages=[locale]) else None
             )
             for locale
             in available_locales.keys()
@@ -169,3 +169,19 @@ def _user_chat_from_update(update):
                 chat = None
 
     return user, chat
+
+
+
+
+# class _Underscore(object):
+#     """Class to emulate flufl.i18n behavior, but with plural support"""
+#     def __init__(self):
+#         self.translators = {
+#             locale: gettext.GNUTranslations(
+#                 open(gettext.find(
+#                     GETTEXT_DOMAIN, GETTEXT_DIR, languages=[locale]
+#                 ), 'rb') if gettext.find(GETTEXT_DOMAIN, GETTEXT_DIR, languages=[locale]) else None
+#             )
+#             for locale in available_locales.keys()
+#             if locale != 'en_US'  # No translation file for en_US
+#         }
