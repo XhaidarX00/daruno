@@ -730,7 +730,7 @@ dispatcher.add_handler(CommandHandler('disable_translations',
 dispatcher.add_handler(CommandHandler('skip', skip_player))
 dispatcher.add_handler(CommandHandler('notify_me', notify_me))
 simple_commands.register()
-settings.register()
+register()
 dispatcher.add_handler(MessageHandler(Filters.status_update, status_update))
 dispatcher.add_error_handler(error)
 
