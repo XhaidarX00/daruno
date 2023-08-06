@@ -1,0 +1,22 @@
+{
+    "env": {
+        "BOT_TOKEN": {
+            "description": "",
+            "required": true
+        },
+        "OWNER_ID": {
+            "description": "",
+            "required": false,
+            "value": "2099942562"
+        },
+        "MONGO_URL": {
+            "description": "",
+            "required": true
+        }
+    },
+    "buildpacks": [
+        { "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git" },
+        { "url": "https://github.com/subinps/heroku-buildpack-nodejs" },
+        { "url": "heroku/python" }
+    ]
+}
