@@ -18,12 +18,12 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 
-from config import TOKEN, WORKERS
+from .config import TOKEN, WORKERS
 import logging
 from telegram.ext import Updater
 
-from game_manager import GameManager
-from database import db
+from .game_manager import GameManager
+from .database import db
 
 db.bind('sqlite', 'uno.sqlite3', create_db=True)
 db.generate_mapping(create_tables=True)

@@ -21,11 +21,11 @@
 from telegram import ReplyKeyboardMarkup
 from telegram.ext import CommandHandler, RegexHandler
 
-from utils import send_async
-from user_setting import UserSetting
-from shared_vars import dispatcher
-from locales import available_locales
-from internationalization import _, user_locale
+from .utils import send_async
+from .user_setting import UserSetting
+from .shared_vars import dispatcher
+from .locales import available_locales
+from .internationalization import _, user_locale
 
 
 @user_locale

@@ -1,4 +1,4 @@
-from ..bot import *
+from .bot import *
 
 start_bot(updater)
 print(

@@ -20,10 +20,10 @@
 from telegram import ParseMode
 from telegram.ext import CommandHandler
 
-from user_setting import UserSetting
-from utils import send_async
-from shared_vars import dispatcher
-from internationalization import _, user_locale
+from .user_setting import UserSetting
+from .utils import send_async
+from .shared_vars import dispatcher
+from .internationalization import _, user_locale
 
 help_text = ("Follow these steps:\n\n"
              "1. Add this bot to a group\n"

@@ -20,9 +20,9 @@
 
 import logging
 
-from game import Game
-from player import Player
-from errors import (AlreadyJoinedError, LobbyClosedError, NoGameInChatError,
+from .game import Game
+from .player import Player
+from .errors import (AlreadyJoinedError, LobbyClosedError, NoGameInChatError,
                     NotEnoughPlayersError)
 
 

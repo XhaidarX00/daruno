@@ -22,9 +22,9 @@ import logging
 
 from telegram.ext.dispatcher import run_async
 
-from internationalization import _, __
-from mwt import MWT
-from shared_vars import gm
+from .internationalization import _, __
+from .mwt import MWT
+from .shared_vars import gm
 
 logger = logging.getLogger(__name__)
 

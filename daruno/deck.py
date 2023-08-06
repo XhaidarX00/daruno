@@ -22,8 +22,8 @@ from random import shuffle
 import logging
 
 import card as c
-from card import Card
-from errors import DeckEmptyError
+from .card import Card
+from .errors import DeckEmptyError
 
 
 class Deck(object):

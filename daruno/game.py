@@ -19,10 +19,10 @@
 
 
 import logging
-from config import ADMIN_LIST, OPEN_LOBBY, DEFAULT_GAMEMODE, ENABLE_TRANSLATIONS
+from .config import ADMIN_LIST, OPEN_LOBBY, DEFAULT_GAMEMODE, ENABLE_TRANSLATIONS
 from datetime import datetime
 
-from deck import Deck
+from .deck import Deck
 import card as c
 
 class Game(object):

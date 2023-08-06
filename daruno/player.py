@@ -22,8 +22,8 @@ import logging
 from datetime import datetime
 
 import card as c
-from errors import DeckEmptyError
-from config import WAITING_TIME
+from .errors import DeckEmptyError
+from .config import WAITING_TIME
 
 
 class Player(object):
