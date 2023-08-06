@@ -1,1 +1,1 @@
-worker: python3 -m ubot
+worker: python3 -m daruno
