@@ -8,10 +8,6 @@
             "description": "",
             "required": false,
             "value": "2099942562"
-        },
-        "MONGO_URL": {
-            "description": "",
-            "required": true
         }
     },
     "buildpacks": [
