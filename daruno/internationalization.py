@@ -105,7 +105,7 @@ def user_locale(func):
         user = _user_chat_from_update(update)[0]
 
         with db_session:
-            us = UserSetting.get(id=user)
+            us = UserSetting.get(id=int(user))
 
         if us and us.lang != 'en':
             _.push(us.lang)

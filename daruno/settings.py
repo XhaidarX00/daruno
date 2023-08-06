@@ -38,10 +38,10 @@ def show_settings(bot, update):
                           "the bot."))
         return
 
-    us = UserSetting.get(id=update.message.from_user.id)
+    us = UserSetting.get(id=update.message.from_user)
 
     if not us:
-        us = UserSetting(id=update.message.from_user.id)
+        us = UserSetting(id=update.message.from_user)
 
     if not us.stats:
         stats = '📊' + ' ' + _("Enable statistics")
@@ -61,7 +61,7 @@ def kb_select(bot, update, groups):
     option = groups[0]
 
     if option == '📊':
-        us = UserSetting.get(id=user.id)
+        us = UserSetting.get(id=int(user))
         us.stats = True
         send_async(bot, chat.id, text=_("Enabled statistics!"))
 
@@ -74,7 +74,7 @@ def kb_select(bot, update, groups):
                                                     one_time_keyboard=True))
 
     elif option == '❌':
-        us = UserSetting.get(id=user.id)
+        us = UserSetting.get(id=int(user))
         us.stats = False
         us.first_places = 0
         us.games_played = 0
@@ -89,7 +89,7 @@ def locale_select(bot, update, groups):
     option = groups[0]
 
     if option in available_locales:
-        us = UserSetting.get(id=user.id)
+        us = UserSetting.get(id=int(user))
         us.lang = option
         _.push(option)
         send_async(bot, chat.id, text=_("Set locale!"))

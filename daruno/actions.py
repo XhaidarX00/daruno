@@ -90,7 +90,7 @@ def do_play_card(bot, player, result_id):
     chat = game.chat
     user = player.user
 
-    us = UserSetting.get(id=user)
+    us = UserSetting.get(id=int(user))
     if not us:
         us = UserSetting(id=user)
 
